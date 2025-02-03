@@ -11,7 +11,7 @@ class SimpleSwitch13(app_manager.RyuApp):
     def __init__(self, *args, **kwargs):
         super(SimpleSwitch13, self).__init__(*args, **kwargs)
        
-        
+        self.arp_table = {}
         self.arp_table = {
             '10.0.0.1': '52:a2:b2:97:17:c8',
             '10.0.0.2': '42:96:15:ec:4f:2f',
@@ -34,9 +34,9 @@ class SimpleSwitch13(app_manager.RyuApp):
         match = parser.OFPMatch(eth_type=0x0806, ip_proto=1)
         actions = [parser.OFPActionOutput(ofproto.OFPP_NORMAL)]
         self.add_flow(datapath, 10,match,actions)
-      
-      
-       def add_flow(self, datapath, priority, match, actions):
+
+
+    def add_flow(self, datapath, priority, match, actions):
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
 
@@ -58,3 +58,35 @@ class SimpleSwitch13(app_manager.RyuApp):
 
         if eth.ethertype == 0x0806:  # ARP
             self.handle_arp(datapath, pkt, eth, in_port)
+
+    def handle_arp(self, datapath, pkt, eth, in_port):
+        arp_pkt = pkt.get_protocol(arp.arp)
+       
+        if arp_pkt.opcode == arp.ARP_REQUEST:
+            self.logger.info("ARP Request: %s -> %s", arp_pkt.src_ip, arp_pkt.dst_ip)
+            
+           # Checks the ARP Request for spoofing
+            if arp_pkt.src_ip in self.arp_table:
+                if self.arp_table[arp_pkt.src_ip] != arp_pkt.src_mac:
+                    self.logger.warning("ARP Spoofing detected: %s is claiming %s", arp_pkt.src_mac, arp_pkt.src_ip)
+                    return  # decline the packets
+            else:
+                self.arp_table[arp_pkt.src_ip] = arp_pkt.src_mac
+
+        elif arp_pkt.opcode == arp.ARP_REPLY:
+            self.logger.info("ARP Reply: %s -> %s", arp_pkt.src_ip, arp_pkt.dst_ip)
+            
+             # Checks the ARP reply for spoofing
+            if arp_pkt.src_ip in self.arp_table:
+                if self.arp_table[arp_pkt.src_ip] != arp_pkt.src_mac:
+                    self.logger.warning("ARP Spoofing detected: %s is claiming %s", arp_pkt.src_mac, arp_pkt.src_ip)
+                    return  # decline the packets
+            else:
+                self.arp_table[arp_pkt.src_ip] = arp_pkt.src_mac
+
+        # sent ARP packet if it is not a spoofing packet
+        actions = [datapath.ofproto_parser.OFPActionOutput(datapath.ofproto.OFPP_FLOOD)]
+        out = datapath.ofproto_parser.OFPPacketOut(datapath=datapath,
+                                                   buffer_id=datapath.ofproto.OFP_NO_BUFFER,
+                                                   in_port=in_port, actions=actions, data=pkt.data)
+        datapath.send_msg(out)
