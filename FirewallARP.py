@@ -11,7 +11,7 @@ class SimpleSwitch13(app_manager.RyuApp):
     def __init__(self, *args, **kwargs):
         super(SimpleSwitch13, self).__init__(*args, **kwargs)
        
-        self.arp_table = {}
+        
         self.arp_table = {
             '10.0.0.1': '52:a2:b2:97:17:c8',
             '10.0.0.2': '42:96:15:ec:4f:2f',
