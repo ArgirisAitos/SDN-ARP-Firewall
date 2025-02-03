@@ -7,7 +7,8 @@ from mininet.log import setLogLevel
 class MyTopo(Topo):
     def build(self):
         switch = self.addSwitch('s1')
-
+       
+       # set a static ARP table to map IP addresses to MAC addresses
         hosts = {
             'h1': ('10.0.0.1', '52:a2:b2:97:17:c8'),
             'h2': ('10.0.0.2', '42:96:15:ec:4f:2f'),
