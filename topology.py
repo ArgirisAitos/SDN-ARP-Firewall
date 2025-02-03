@@ -18,6 +18,7 @@ class SimpleSwitch13(app_manager.RyuApp):
             '10.0.0.3': '42:fd:3e:81:6e:3c',
             '10.0.0.4': '7e:86:c9:34:71:a4'
         }
+        
  @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
     def switch_features_handler(self, ev):
         datapath = ev.msg.datapath
@@ -34,3 +35,11 @@ class SimpleSwitch13(app_manager.RyuApp):
         actions = [parser.OFPActionOutput(ofproto.OFPP_NORMAL)]
         self.add_flow(datapath, 10,match,actions)
 
+ def add_flow(self, datapath, priority, match, actions):
+        ofproto = datapath.ofproto
+        parser = datapath.ofproto_parser
+
+        inst = [parser.OFPInstructionActions(ofproto.OFPIT_APPLY_ACTIONS, actions)]
+        mod = parser.OFPFlowMod(datapath=datapath, priority=priority,
+                                 match=match, instructions=inst)
+        datapath.send_msg(mod)
