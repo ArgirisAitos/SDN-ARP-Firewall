@@ -18,15 +18,3 @@ class SimpleSwitch13(app_manager.RyuApp):
             '10.0.0.3': '42:fd:3e:81:6e:3c',
             '10.0.0.4': '7e:86:c9:34:71:a4'
         }
-for h, (ip, mac) in hosts.items():
-            host = self.addHost(h, ip=ip, mac=mac)
-            self.addLink(host, switch)
-
-if __name__ == '__main__':
-    setLogLevel('info')
-    topo = MyTopo()
-    net = Mininet(topo=topo, controller=RemoteController)
-    net.start()
-
-    CLI(net)
-    net.stop()
