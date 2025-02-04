@@ -32,14 +32,14 @@ This project implements a Software-Defined Networking (SDN) solution to detect a
 
 # Setup Instructions 
 
-1. # Clone this repository 
+1. Clone this repository 
 ```bash 
 
 https://github.com/ArgirisAitos/SDN-ARP-Firewall
 
 ```
 
-2. # Install Dependecies
+2. Install Dependecies
 
  ```bash
 
@@ -59,7 +59,7 @@ https://github.com/ArgirisAitos/SDN-ARP-Firewall
   sudo python topology.py 
   
   ```
-4. # Run the Ryu Controller 
+4. Run the Ryu Controller 
 
   ```bash 
 
@@ -67,12 +67,12 @@ https://github.com/ArgirisAitos/SDN-ARP-Firewall
 
   ```
 
-  5. # Test ARP Spoofing Prevention 
+  5. Test ARP Spoofing Prevention 
 
 
      # ARP Spoofing Attempt
 
-   **Try to send a fake ARP reply from  h3:**
+   Try to send a fake ARP reply from  h3:
 
      ```bash
      mininet> h1 arpspoof -i h1-eth0 -t 10.0.0.2 10.0.0.3 
