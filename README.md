@@ -80,6 +80,8 @@ mininet> h1 arpspoof -i h1-eth0 -t 10.0.0.2 10.0.0.3
 The controller **logs a warning and blocks the attack**.
 
 
+![Στιγμιότυπο οθόνης 2025-02-04 181045](https://github.com/user-attachments/assets/6cb024ba-4ba7-4368-9139-00c405eb57e5)
+
 
 
 
