@@ -16,8 +16,7 @@ This project implements a Software-Defined Networking (SDN) solution to detect a
  # Requirements 
 
  - Mininet
- - Ryu controller 
-
+ - Ryu controller
 
 
 
@@ -28,6 +27,7 @@ This project implements a Software-Defined Networking (SDN) solution to detect a
  - 1 OpenFlow switch (s1)
  - Ryu controller managing the firewall rules.
 
+![miniedit](https://github.com/user-attachments/assets/45d6f274-2c6c-4b2c-92a1-abeed99c72dc)
 
 
 # Setup Instructions 
