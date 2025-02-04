@@ -68,11 +68,10 @@ git clone https://github.com/ArgirisAitos/SDN-ARP-Firewall
   ```
 
   5. **Test ARP Spoofing Prevention**
+      
+      **ARP Spoofing Attempt**
 
-
-     ARP Spoofing Attempt
-
-   Try to send a fake ARP reply from  h3:
+   Try to send a fake ARP reply from h1 pretending to have the IP of h3 using the following command:
       
 ```bash
 mininet> h1 arpspoof -i h1-eth0 -t 10.0.0.2 10.0.0.3
