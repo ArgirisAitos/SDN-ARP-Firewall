@@ -35,7 +35,7 @@ This project implements a Software-Defined Networking (SDN) solution to detect a
 1. **Clone this repository**
 ```bash 
 
-https://github.com/ArgirisAitos/SDN-ARP-Firewall
+git clone https://github.com/ArgirisAitos/SDN-ARP-Firewall
 
 ```
 
@@ -74,7 +74,7 @@ https://github.com/ArgirisAitos/SDN-ARP-Firewall
 
    Try to send a fake ARP reply from  h3:
       
-      ```bash
+```bash
 mininet> h1 arpspoof -i h1-eth0 -t 10.0.0.2 10.0.0.3
 ```
 
