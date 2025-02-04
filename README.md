@@ -13,6 +13,14 @@ This project implements a Software-Defined Networking (SDN) solution to detect a
 - OpenFlow-based packet forwarding.
 
 
+ # Requirements 
+
+ - Mininet
+ - Ryu controller 
+
+
+
+
 # Network Topology
  The network consists of:
 
@@ -21,7 +29,4 @@ This project implements a Software-Defined Networking (SDN) solution to detect a
  - Ryu controller managing the firewall rules.
 
 
- # Requirements 
 
- - Mininet
- - Ryu controller 
