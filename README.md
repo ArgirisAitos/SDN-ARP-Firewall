@@ -63,7 +63,7 @@ git clone https://github.com/ArgirisAitos/SDN-ARP-Firewall
 
   ```bash 
 
-  ryu-managerv FirewallARP.py
+  ryu-manager FirewallARP.py
 
   ```
 
