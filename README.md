@@ -52,7 +52,7 @@ https://github.com/ArgirisAitos/SDN-ARP-Firewall
   
   ```
 
-  3. # Start Mininet with the Custom Topology
+  3. **Start Mininet with the Custom Topology**
 
   ```bash
 
