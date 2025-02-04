@@ -13,3 +13,15 @@ This project implements a Software-Defined Networking (SDN) solution to detect a
 - OpenFlow-based packet forwarding.
 
 
+# Network Topology
+ The network consists of:
+
+ - 4 hosts (h1,h2,h3,h4)
+ - 1 OpenFlow switch (s1)
+ - Ryu controller managing the firewall rules.
+
+
+ # Requirements 
+
+ - Mininet
+ - Ryu controller 
